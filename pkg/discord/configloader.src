@@ -1,0 +1,36 @@
+/*
+ * Loads the Discord webhook configuration file (webhook-config.json) and stores it in a global property.
+ * If the file does not exist, it is created with example values. The intent is for the file to not exist
+ * in version control, so the webhook URLs do not leak.
+ *
+ * The following example channels are included:
+ * - feed: for general, uncategorized messages
+ * - announcements: for announcements/MOTD
+ * - pages: in-game support pages
+ */
+
+use basic;
+use file;
+use uo;
+
+include ":discord:sendMessage";
+
+const CONFIG_FILE := ":discord:webhook-config.json";
+
+program configloader()
+    EraseGlobalProperty("DiscordWebhooks");
+    if (!FileExists(CONFIG_FILE))
+        var confstruct := struct{
+            "feed" := "https://discord.com/api/webhooks/123456789123456789/12345678912345678912345678912345678912345678912345678912345678912345",
+            "announcemens" := "https://discord.com/api/webhooks/123456789123456789/12345678912345678912345678912345678912345678912345678912345678912345",
+            "pages" := "https://discord.com/api/webhooks/123456789123456789/12345678912345678912345678912345678912345678912345678912345678912345"
+        };
+        var confjson := PackJSON(confstruct);
+        var err := WriteFile(CONFIG_FILE, array{confjson});
+        Print(err);
+        Print("Discord webhook config not found; example file created at " + CONFIG_FILE + ". Edit your webhook URLs into this file and restart the server if you want to use Discord integration.");
+    endif
+    var conflines := ReadFile(CONFIG_FILE);
+    var confstruct := UnpackJSON(conflines[1]);
+    SetGlobalProperty("DiscordWebhooks",confstruct);
+endprogram

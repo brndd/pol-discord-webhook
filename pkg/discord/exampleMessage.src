@@ -1,0 +1,24 @@
+/*
+ * This is an example of a script that you might use to send a message to Discord
+ * from a context where you don't want to use a blocking function.
+ * Run it with Start_Script. The parameters are passed in an array, as with all scripts.
+ */
+
+use uo;
+use basic;
+
+include ":discord:sendMessage";
+
+program senddiscordmessage(params)
+	var text := params[1];
+	var channel := params[2];
+	var allowMentions := params[3];
+	
+	if (!channel && !allowMentions)
+		SendMessageToDiscord(text);
+	elseif (!allowMentions)
+		SendMessageToDiscord(text, channel);
+	else
+		SendMessageToDiscord(text, channel, allowMentions);
+	endif
+endprogram

@@ -1,0 +1,48 @@
+/*
+ * This is an example of a script that uses SendEmbedsToDiscord to send a nicely formatted embed.
+ * It demonstrates (nearly?) all features available to embeds.
+ */
+
+include ":discord:sendMessage";
+
+program disctext()
+    var embed := struct;
+    embed.title := "Title";
+    embed.url := "https://google.com";
+    
+    var author := struct;
+    author.name := "Some author";
+    author.url := "https://bing.com";
+    author.icon_url := "https://i.imgur.com/gE6wXnn.jpg";
+    embed.author := author;
+
+    embed.color := "16761035";
+
+    embed.description := "Some description";
+
+    var footer := struct;
+    footer.text := "Some footer";
+    footer.icon_url := "https://i.imgur.com/gE6wXnn.jpg";
+    embed.footer := footer;
+
+    embed.image := "https://i.imgur.com/gE6wXnn.jpg";
+    embed.thumbnail := "https://i.imgur.com/gE6wXnn.jpg";
+
+    embed.timestamp := $"2020-01-01T00:00:00.000Z";
+    
+
+    var fields := array;
+    var i;
+    for (i := 1; i <= 25; i:=i+1)
+        var field := struct;
+        field.name := "Field " + i;
+        field.value := "Value " + i;
+        field.inline := 1;
+        fields.append(field);
+    endfor
+
+    embed.fields := fields;
+
+    var res := SendEmbedsToDiscord(embed, content := "Here comes an embed!");
+    Print($"Webhook returned: {res}");
+endprogram
