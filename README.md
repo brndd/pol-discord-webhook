@@ -22,6 +22,10 @@ and even in good conditions will probably take some milliseconds. Do not call th
 If you do not want to wait for the functions to return, wrap them in a script that you start using [Start_Script](https://docs.polserver.com/pol100/fullfunc.php?xmlfile=osem#Start_Script).
 This way the execution of your main script won't block. See [exampleMessage.src](pkg/discord/exampleMessage.src) and [exampleEmbed.src](pkg/discord/exampleEmbed.src) for examples.
 
+Here's an example of what's possible with `SendEmbedsToDiscord`:
+
+![](https://i.imgur.com/gxbOy9u.png)
+
 # TODO
 
 - Expand mentions configuration to allow more granularity than just allow/disallow.
