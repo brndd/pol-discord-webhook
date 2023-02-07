@@ -47,7 +47,7 @@ function SendMessageToDiscord(text, channel := "feed", allowMentions := 0)
     var post_headers := struct{"Content-Type" := "application/json"};
     var post_options := struct{"headers" := post_headers, "data" := post_data};
     
-    return HTTPRequest(GetDiscordWebhook(channel) + "?wait=true", "POST", post_options);
+    return HTTPRequest(GetDiscordWebhook(channel), "POST", post_options);
 endfunction
 
 /* 
