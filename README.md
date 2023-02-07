@@ -8,19 +8,19 @@ This package was originally developed for the [Northern Winds](https://northern-
 
 # Usage
 
-Install the package on your server. Modify webhook-config.json to contain your webhook URLs.
+Install the package on your server. Modify [webhook-config.json](pkg/discord/webhook-config.json) to contain your webhook URLs.
 You may also add extra name:url pairs here. They will be loaded into a global variable on the server
 and can be accessed by their configuration name when calling the functions.
 
-Use `include ":discord:sendMessage";` in your scripts to include the functions. See the comments in sendMessage.inc
-for documentation of what the functions do.
+Use `include ":discord:sendMessage";` in your scripts to include the functions. See the comments in [sendMessage.inc](pkg/discord/include/sendMessage.inc)
+for documentation of the functions.
 
 **Important:** the functions are blocking; they won't return until the HTTP request finishes, which can take a long time,
 and even in good conditions will probably take some milliseconds. Do not call them directly from scripts where speed is important.
 *Especially* do not call them from critical sections or packet hooks.
 
 If you do not want to wait for the functions to return, wrap them in a script that you start using [Start_Script](https://docs.polserver.com/pol100/fullfunc.php?xmlfile=osem#Start_Script).
-This way the execution of your main script won't block. See [exampleMessage.src](exampleMessage.src) and [exampleEmbed.src](exampleEmbed.src) for examples.
+This way the execution of your main script won't block. See [exampleMessage.src](pkg/discord/exampleMessage.src) and [exampleEmbed.src](pkg/discord/exampleEmbed.src) for examples.
 
 # TODO
 
