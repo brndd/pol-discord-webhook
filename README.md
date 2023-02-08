@@ -8,7 +8,10 @@ This package was originally developed for the [Northern Winds](https://northern-
 
 # Usage
 
-Install the package on your server. Modify [webhook-config.json](pkg/discord/webhook-config.json) to contain your webhook URLs.
+Install the package on your server. Edit [fileaccess.cfg](https://docs.polserver.com/pol100/configfiles.php#fileaccess.cfg)
+to allow the package to access .json files in its own directory.
+
+Modify [webhook-config.json](pkg/discord/webhook-config.json) to contain your webhook URLs.
 You may also add extra name:url pairs here. They will be loaded into a global variable on the server
 and can be accessed by their configuration name when calling the functions.
 
